@@ -1,0 +1,9 @@
+#!/bin/bash
+set -ex
+
+# script clones forklift repo and checks out specific tag if needed
+git clone https://github.com/kubev2v/forklift /go/src/github.com/kubev2v/forklift
+if [ -n $FORKLIFT_TAG ]
+then
+    git -C /go/src/github.com/kubev2v/forklift checkout $FORKLIFT_TAG
+fi

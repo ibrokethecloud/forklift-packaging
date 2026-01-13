@@ -1,0 +1,22 @@
+#!/bin/bash
+set -ex
+
+TOP_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
+PACKAGE_DIR="${TOP_DIR}/package"
+
+
+COMMIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+COMMIT_BRANCH_FORMATTED=$(echo "${COMMIT_BRANCH}" | sed -E 's/[^a-zA-Z0-9.]+/-/g')
+
+
+if [ -n ${TAG} ]
+then
+    IMAGE_TAG="${COMMIT_BRANCH_FORMATTED}-head"
+else
+    IMAGE_TAG="${TAG}"
+fi
+
+REPO=${REPO:-rancher}   
+
+echo "IMAGE_TAG: $IMAGE_TAG"
+echo "REPO: $REPO"

@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+controller-gen crd rbac:roleName=manager-role webhook paths="/go/src/github.com/kubev2v/forklift/pkg/apis/..." output:dir=$HOME/crds

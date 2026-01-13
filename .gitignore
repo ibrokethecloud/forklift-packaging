@@ -1,0 +1,6 @@
+./package/forklift-api/forklift-api
+./package/forklift-controller/forklift-controller
+./package/openstack-populator/openstack-populator
+./package/ova-provider-server/ova-provider-server
+./package/ovirt-populator/ovirt-populator
+./package/populator-controller/populator-controller

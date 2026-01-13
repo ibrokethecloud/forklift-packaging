@@ -1,0 +1,17 @@
+FROM registry.suse.com/bci/golang:1.25
+ARG DAPPER_HOST_ARCH
+ENV ARCH=$DAPPER_HOST_ARCH
+ENV DAPPER_ENV="REPO TAG PUSH FORKLIFT_TAG"
+ENV DAPPER_SOURCE=/go/src/github.com/harvester/forklift-packaging
+ENV DAPPER_DOCKER_SOCKET=true
+ENV DAPPER_RUN_ARGS="-v /run/containerd/containerd.sock:/run/containerd/containerd.sock --privileged"
+ENV DAPPER_OUTPUT="./crds ./package"
+WORKDIR ${DAPPER_SOURCE}
+ENV HOME=${DAPPER_SOURCE}
+
+## setup environment for packaging of forklift
+RUN go install sigs.k8s.io/controller-tools/cmd/controller-gen@v0.17.0 && \
+    zypper in -y docker
+
+ENTRYPOINT ["./scripts/entry"]
+CMD ["ci"]
