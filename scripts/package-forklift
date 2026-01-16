@@ -10,16 +10,16 @@ source $SCRIPTS_DIR/version
 
 if [[ -z $COMPONENT_NAME ]]
 then
-    for component in forklift-api forklift-controller openstack-populator ova-provider-server ovirt-populator populator-controller validation virt-v2v
+    for component in forklift-api forklift-controller openstack-populator ova-provider-server ovirt-populator populator-controller validation virt-v2v vsphere-xcopy-populator forklift-operator
     do
-        docker build -t ${REPO}/harvester-${component}:${IMAGE_TAG} -f $PACKAGE_DIR/${component}/Dockerfile /go/src/github.com/kubev2v/forklift
+        docker build --build-arg ARCH=${ARCH} -t ${REPO}/harvester-${component}:${IMAGE_TAG} -f $PACKAGE_DIR/${component}/Dockerfile /go/src/github.com/kubev2v/forklift
         if [[ -n $PUSH ]] 
         then
             docker push ${REPO}/harvester-${component}:${IMAGE_TAG}
         fi
     done
 else 
-  docker build -t ${REPO}/harvester-${COMPONENT_NAME}:${IMAGE_TAG} -f $PACKAGE_DIR/${COMPONENT_NAME}/Dockerfile /go/src/github.com/kubev2v/forklift
+  docker build --build-arg ARCH=${ARCH} -t ${REPO}/harvester-${COMPONENT_NAME}:${IMAGE_TAG} -f $PACKAGE_DIR/${COMPONENT_NAME}/Dockerfile /go/src/github.com/kubev2v/forklift
         if [[ -n $PUSH ]] 
         then
             docker push ${REPO}/harvester-${component}:${IMAGE_TAG}
