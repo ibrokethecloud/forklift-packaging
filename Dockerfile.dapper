@@ -1,7 +1,7 @@
 FROM registry.suse.com/bci/golang:1.25
 ARG DAPPER_HOST_ARCH
 ENV ARCH=$DAPPER_HOST_ARCH
-ENV DAPPER_ENV="REPO TAG PUSH FORKLIFT_TAG"
+ENV DAPPER_ENV="REPO TAG PUSH FORKLIFT_TAG COMPONENT_NAME"
 ENV DAPPER_SOURCE=/go/src/github.com/harvester/forklift-packaging
 ENV DAPPER_DOCKER_SOCKET=true
 ENV DAPPER_RUN_ARGS="-v /run/containerd/containerd.sock:/run/containerd/containerd.sock --privileged"
