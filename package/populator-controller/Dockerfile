@@ -1,3 +1,8 @@
+FROM registry.suse.com/bci/golang:1.25 AS builder
+WORKDIR /app
+COPY --chown=1001:0 ./ ./
+RUN go build -buildvcs=false -ldflags="-w -s" github.com/kubev2v/forklift/cmd/populator-controller
+
 FROM registry.suse.com/bci/bci-base:15.7
 # Required to be able to get files from within the pod
 
@@ -5,5 +10,5 @@ RUN zypper -n rm container-suseconnect && \
     zypper -n install tar && \
     zypper -n clean -a
 
-COPY populator-controller /usr/local/bin/populator-controller
+COPY --from=builder /app/populator-controller /usr/local/bin/populator-controller
 ENTRYPOINT ["/usr/local/bin/populator-controller"]

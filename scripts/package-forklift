@@ -8,11 +8,9 @@ PACKAGE_DIR="${TOP_DIR}/package"
 # sets IMAGE_TAG and is used for building the image
 source $SCRIPTS_DIR/version
 
-$SCRIPTS_DIR/build
-
 for component in forklift-api forklift-controller openstack-populator ova-provider-server ovirt-populator populator-controller 
 do
-    docker build -t ${REPO}/harvester-${component}:${IMAGE_TAG} $PACKAGE_DIR/${component}
+    docker build -t ${REPO}/harvester-${component}:${IMAGE_TAG} -f $PACKAGE_DIR/${component}/Dockerfile /go/src/github.com/kubev2v/forklift
     if [[ -n $PUSH ]] 
     then
         docker push ${REPO}/harvester-${component}:${IMAGE_TAG}
