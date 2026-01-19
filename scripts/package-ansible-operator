@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+TOP_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
+SCRIPTS_DIR="${TOP_DIR}/scripts"
+PACKAGE_DIR="${TOP_DIR}/package"
+
+# sets IMAGE_TAG and is used for building the image
+source $SCRIPTS_DIR/version
+
+docker build  --build-arg ARCH=${ARCH} -t ${REPO}/harvester-ansible-operator:${IMAGE_TAG} ${PACKAGE_DIR}/ansible-operator
+docker push ${REPO}/harvester-ansible-operator:${IMAGE_TAG}

@@ -197,5 +197,5 @@ roleRef:
   name: '{{ include "forklift-operator.fullname" . }}-forklift-controller-role'
 subjects:
 - kind: ServiceAccount
-  name: '{{ include "forklift-operator.serviceAccountName" . }}'
+  name: forklift-controller
   namespace: '{{ .Release.Namespace }}'

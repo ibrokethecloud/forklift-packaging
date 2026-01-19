@@ -148,5 +148,5 @@ roleRef:
   name: '{{ include "forklift-operator.fullname" . }}-forklift-populator-controller-role'
 subjects:
 - kind: ServiceAccount
-  name: '{{ include "forklift-operator.serviceAccountName" . }}'
+  name: forklift-populator-controller
   namespace: '{{ .Release.Namespace }}'

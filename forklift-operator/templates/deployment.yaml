@@ -28,22 +28,22 @@ spec:
         - name: WATCH_NAMESPACE
           valueFrom:
             fieldRef:
-              fieldPath: metadata.annotations['olm.targetNamespaces']
+              fieldPath: metadata.namespace
         - name: ANSIBLE_GATHERING
           value: {{ quote .Values.forkliftOperatorAnsible.forkliftOperator.env.ansibleGathering
             }}
         - name: CONTROLLER_IMAGE
-          value: "{{$repo}}/forklift-controller:{{$tag}}"
+          value: "{{$repo}}/harvester-forklift-controller:{{$tag}}"
         - name: API_IMAGE
-          value: "{{$repo}}/forklift-api:{{$tag}}"
+          value: "{{$repo}}/harvester-forklift-api:{{$tag}}"
         - name: MUST_GATHER_IMAGE
-          value: "{{$repo}}/forklift-must-gather:{{$tag}}"
+          value: "{{$repo}}/harvester-forklift-must-gather:{{$tag}}"
         - name: UI_PLUGIN_IMAGE
           value: ""
         - name: VALIDATION_IMAGE
-          value: "{{$repo}}/forklift-validation:{{$tag}}"
+          value: "{{$repo}}/harvester-validation:{{$tag}}"
         - name: VIRT_V2V_IMAGE
-          value: "{{$repo}}/forklift-virt-v2v:{{$tag}}"
+          value: "{{$repo}}/harvester-forklift-virt-v2v:{{$tag}}"
         - name: VIRT_V2V_DONT_REQUEST_KVM
           value: {{ quote .Values.forkliftOperatorAnsible.forkliftOperator.env.virtV2VDontRequestKvm
             }}
@@ -66,13 +66,13 @@ spec:
           value: {{ quote .Values.forkliftOperatorAnsible.forkliftOperator.env.blockOverhead
             }}
         - name: POPULATOR_CONTROLLER_IMAGE
-          value: "{{$repo}}/forklift-populator-controller:{{$tag}}"
+          value: "{{$repo}}/harvester-populator-controller:{{$tag}}"
         - name: OVIRT_POPULATOR_IMAGE
-          value: "{{$repo}}/forklift-ovirt-populator:{{$tag}}"
+          value: "{{$repo}}/harvester-forklift-ovirt-populator:{{$tag}}"
         - name: OPENSTACK_POPULATOR_IMAGE
-          value: "{{$repo}}/forklift-openstack-populator:{{$tag}}"
+          value: "{{$repo}}/harvester-forklift-openstack-populator:{{$tag}}"
         - name: OVA_PROVIDER_SERVER_IMAGE
-          value: "{{$repo}}/forklift-ova-provider-server:{{$tag}}"
+          value: "{{$repo}}/harvester-forklift-ova-provider-server:{{$tag}}"
         - name: OVIRT_OS_MAP
           value: {{ quote .Values.forkliftOperatorAnsible.forkliftOperator.env.ovirtOsMap
             }}
@@ -83,12 +83,12 @@ spec:
           value: {{ quote .Values.forkliftOperatorAnsible.forkliftOperator.env.virtCustomizeMap
             }}
         - name: VSPHERE_XCOPY_VOLUME_POPULATOR_IMAGE
-          value: "{{$repo}}/forklift-vsphere-xcopy-volume-populator:{{$tag}}"
+          value: "{{$repo}}/harvester-forklift-vsphere-xcopy-volume-populator:{{$tag}}"
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
-        image: '{{ .Values.forkliftOperatorAnsible.forkliftOperator.image.repository }}:{{
-          .Values.forkliftOperatorAnsible.forkliftOperator.image.tag | default .Chart.AppVersion
-          }}'
+        image: "{{ .Values.forkliftOperatorAnsible.forkliftOperator.repo }}/{{ .Values.forkliftOperatorAnsible.forkliftOperator.operatorImage }}:{{
+          .Values.forkliftOperatorAnsible.forkliftOperator.tag | default .Chart.AppVersion
+          }}"
         imagePullPolicy: {{ .Values.forkliftOperatorAnsible.forkliftOperator.imagePullPolicy
           }}
         livenessProbe:

@@ -2,6 +2,7 @@ forkliftOperatorAnsible:
   forkliftOperator:
     repo: gmehta3
     tag: main-head
+    operatorImage: harvester-forklift-operator
     args:
     - --health-probe-bind-address=:6789
     - --metrics-bind-address=127.0.0.1:8080
@@ -11,30 +12,17 @@ forkliftOperatorAnsible:
       tag: main-head
       repo: gmehta3
       ansibleGathering: explicit
-      apiImage: forklift-api
       blockOverhead: ""
       cdiExportTokenTtl: ""
       cleanupRetries: ""
-      controllerImage: forklift-controller
       filesystemOverhead: ""
-      mustGatherImage: forklift-must-gather
-      openstackPopulatorImage: openstack-populator
-      ovaProviderServerImage: ova-provider-server
       ovirtOsMap: ""
-      ovirtPopulatorImage: ovirt-populator
-      populatorControllerImage: populator-controller
       snapshotRemovalTimeout: ""
       snapshotStatusCheckRate: ""
-      uiPluginImage: forklift-console-plugin
-      validationImage: validation
       virtCustomizeMap: ""
       virtV2VDontRequestKvm: ""
-      virtV2VImage: virt-v2v
       vsphereOsMap: ""
       vsphereXcopyVolumePopulatorImage: ""
-    image:
-      repository: gmehta3/forklift-operator
-      tag: main-head
     imagePullPolicy: Always
     resources:
       requests:

@@ -1,9 +1,15 @@
 #!/bin/bash
 set -ex
 
+TOP_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
+
 # script clones forklift repo and checks out specific tag if needed
 git clone https://github.com/kubev2v/forklift /go/src/github.com/kubev2v/forklift
 if [ -n $FORKLIFT_TAG ]
 then
     git -C /go/src/github.com/kubev2v/forklift checkout $FORKLIFT_TAG
 fi
+
+# apply patches
+cp $TOP_DIR/patches/main.yml /go/src/github.com/kubev2v/forklift/operator/roles/forkliftcontroller/tasks/main.yml
+cp $TOP_DIR/patches/watches.yml /go/src/github.com/kubev2v/forklift/operator/watches.yml

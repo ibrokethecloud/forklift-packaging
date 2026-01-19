@@ -1,0 +1,11 @@
+---
+# Use the 'create api' subcommand to add watches to this file.
+- version: v1beta1
+  group: forklift.konveyor.io
+  kind: ForkliftController
+  role: forkliftcontroller
+#+kubebuilder:scaffold:watch
+  finalizer:
+    name: forklift.konveyor.io/finalizer
+    vars:
+      state: absent

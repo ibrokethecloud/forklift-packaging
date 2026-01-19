@@ -22,6 +22,6 @@ else
   docker build --build-arg ARCH=${ARCH} -t ${REPO}/harvester-${COMPONENT_NAME}:${IMAGE_TAG} -f $PACKAGE_DIR/${COMPONENT_NAME}/Dockerfile /go/src/github.com/kubev2v/forklift
         if [[ -n $PUSH ]] 
         then
-            docker push ${REPO}/harvester-${component}:${IMAGE_TAG}
+            docker push ${REPO}/harvester-${COMPONENT_NAME}:${IMAGE_TAG}
         fi
 fi
